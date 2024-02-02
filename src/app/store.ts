@@ -1,7 +1,8 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
+import userSlice from 'features/auth/sign-up/model/slice'
 
 const rootReducer = {
-    
+    user: userSlice
 }
 
 export const store = configureStore({
