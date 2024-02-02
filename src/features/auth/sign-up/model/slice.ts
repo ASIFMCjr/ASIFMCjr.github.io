@@ -1,41 +1,26 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { signUp } from "../api";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { User } from "../api";
 
-export const fetchUser = createAsyncThunk(
-    'user/fetchUserData',
-    async (userData: {email: string, password: string}) => {
-      const response = await signUp(userData.email, userData.password)
-      return response
-    },
-  )
-
-const userSlice = createSlice({
-    name: "user",
-    initialState: {
+const initialState: {user: User} = {
         user: {
-            id: null,
+            id: undefined,
             email:	'',
             password:	'',
-            is_superuser: '',
-            is_staff: '',
-            is_active: '',
-            date_joined: '',
-            last_login: '',
+            is_superuser: undefined,
+            is_staff: undefined,
+            is_active: undefined,
+            date_joined: undefined,
+            last_login: undefined,
         }
-    },
+}
+const userSlice = createSlice({
+    name: "user",
+    initialState,
     reducers: {
-        setUser: (state, action) => {
+        setUser: (state, action: PayloadAction<User>) => {
             state.user = action.payload
         }
     },
-    extraReducers: (builder) => {
-        // Add reducers for additional action types here, and handle loading state as needed
-        builder.addCase(fetchUser.fulfilled, (state, action) => {
-          // Add user to the state array
-          state.user = action.payload
-          
-        })
-      },
 })
 
 export default userSlice.reducer

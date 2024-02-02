@@ -1,7 +1,4 @@
 import axios from "axios";
-// import { useAppDispatch } from "shared/model/hooks";
-// import { setUser } from "../model/slice";
-// import { store } from "app/store";
 
 export interface User {
     id?: number;
@@ -14,20 +11,20 @@ export interface User {
     last_login?: string;
 }
 
-const checkAvailableEmail = async (email: string) => {
+export const checkAvailableEmail = async (email: string): Promise<boolean> => {
     return axios.get('api/users/available', { params: {email: email}})
-        .then(res => res.data)
+        .then(res => res.data.is_available)
         .catch((err) => err)
 }
 
-export const signUp = async (email: string, password: string) => {
-    const availableEmail = await checkAvailableEmail(email)
-    if (!availableEmail.is_available) { return availableEmail }
+export const signUp = async (email: string, password: string): Promise<User> => {
 
-    return await axios.post('api/users/', {
+    return axios.post('api/users/', {
                 email: email,
                 password: password 
             }).then(res => {
                 return res.data
             })
 }  
+
+// вынести чек в компонент, использоавть там сайн ап, удалить асинк санку, использовать в компоненте обычный диспатч
