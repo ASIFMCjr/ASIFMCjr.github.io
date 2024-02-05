@@ -9,8 +9,10 @@ export interface Token {
 export const getToken = async (): Promise<string> => {
 
     const access = localStorage.getItem('access')
-
-    return access ? access : (await revokeToken()).access
+    
+    return await axios.post('api/token/verify/', {token: access})
+        .then(() => access!)
+        .catch(async () => {return (await revokeToken()).access})
 }
 
 export const createTokens = async (email: string, password: string): Promise<Token> => {
@@ -30,5 +32,5 @@ export const revokeToken = async (): Promise<Token> => {
 
     const refresh = Cookies.get('refresh')
 
-    return axios.post<Token>('api/token/refresh', {refresh: refresh }).then(res => res.data)
+    return axios.post<Token>('api/token/refresh/', {refresh: refresh }).then(res => res.data)
 }

@@ -25,6 +25,4 @@ export const signUp = async (email: string, password: string): Promise<User> => 
             }).then(res => {
                 return res.data
             })
-}  
-
-// вынести чек в компонент, использоавть там сайн ап, удалить асинк санку, использовать в компоненте обычный диспатч
+}
