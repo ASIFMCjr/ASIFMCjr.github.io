@@ -11,18 +11,6 @@ export interface User {
     last_login?: string;
 }
 
-export const checkAvailableEmail = async (email: string): Promise<boolean> => {
-    return axios.get('api/users/available', { params: {email: email}})
-        .then(res => res.data.is_available)
-        .catch((err) => err)
-}
+export const checkAvailableEmail = async (email: string): Promise<boolean> => (await axios.get<{is_available: boolean}>('api/users/available', { params: {email}})).data.is_available
 
-export const signUp = async (email: string, password: string): Promise<User> => {
-
-    return axios.post('api/users/', {
-                email: email,
-                password: password 
-            }).then(res => {
-                return res.data
-            })
-}
+export const signUp = async (email: string, password: string): Promise<User> => (await axios.post<User>('api/users/', { email, password })).data

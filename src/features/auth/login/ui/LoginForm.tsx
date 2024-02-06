@@ -2,56 +2,28 @@ import React from 'react'
 import { login } from '../api'
 import { FieldValues, useForm } from 'react-hook-form'
 import { AxiosError } from 'axios'
+import { Form, FormValues } from 'entities/form'
+import { useNavigate } from 'react-router-dom'
 
-export const Form = () => {
+export const LoginForm = () => {
+  const navigate = useNavigate()
+  const { formState: { errors }, setError, clearErrors } = useForm<FormValues>()
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setError
-  } = useForm()
-  const onSubmit = async ({email, password}: FieldValues) => {
-      const tryAuth = await login(email, password)
-      if (tryAuth instanceof AxiosError && tryAuth?.response?.status === 401) {
+  const onSubmit = async ({email, password}: FieldValues): Promise<void> => {
+    try {
+      await login(email, password)
+      navigate('../books')
+    } catch (err: any) {
+      if (err instanceof AxiosError && err?.response?.status === 401) {
         setError('email', { type: 'wrong', message: 'Wrong data' })
       }
+      setError('email', { type: 'internet', message: `${err.response.statusText}. Please, try later` })
+      setTimeout(() => clearErrors("email"), 2000)
+    }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="email">email</label>
-      <input
-        id="email"
-        {...register("email", {
-          required: "required",
-          pattern: {
-            value: /\S+@\S+\.\S+/,
-            message: "Entered value does not match email format",
-          },
-        })}
-        type="email"
-      />
-      {errors.email && errors.email.type === "wrong" && (
-          <span>Wrong user data</span>
-        )}
-        {errors.email && errors.email.type === "required" && (
-          <span>This is required</span>
-        )}
-        {errors.email && errors.email.type === "pattern" && (
-          <span>not an email</span>
-        )}
-
-      <label htmlFor="password">password</label>
-      <input
-        id="password"
-        {...register("password", { required: true })}
-      />
-        {errors.password && errors.password.type === "required" && (
-          <span>This is required</span>
-        )}
-      <input type="submit" />
-    </form>
+    <Form onSubmit={onSubmit} apiErrors={errors}/>
   )
 }
 

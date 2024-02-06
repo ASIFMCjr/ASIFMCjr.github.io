@@ -1,7 +1,6 @@
 import { bookApi } from 'entities/book'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { revokeToken } from 'shared/api';
 
 export const Book = () => {
 
@@ -14,7 +13,6 @@ export const Book = () => {
     initLoad()
   }, [])
 
-  revokeToken()
   return (
     <div>
       <ul>

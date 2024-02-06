@@ -15,19 +15,21 @@ export const Book = () => {
     const initLoad = async () => setBooks(await bookApi.getBooks(page_id ? page_id : ''))
     initLoad()
   }, [page_id])
-  
+
   return (
     <div>
           {books?.result.map((book: bookApi.Book) => {
             return (
               <Link to={`${book.id}`} onClick={() => scrollTo({top: 0, left: 0, behavior: 'smooth'})} key={book.id}>
-                <p>{book.title}</p>
-                <p>{book.description}</p>
-                <p>{book.price}</p>
+                
+                  <p>{book.price}</p>
+                  <p>{book.title}</p>
+                  {/* Buy button */}
+                
               </Link>
             )
           })}
-        <Pagination pages={books ? books!.total_pages : 1} current_page={books ? books!.page : 1}/>
+        <Pagination pages={books ? books?.total_pages : 1} current_page={books ? books?.page : 1}/>
     </div>
   )
 }

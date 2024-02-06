@@ -3,55 +3,34 @@ import { useAppDispatch } from 'shared/model/hooks'
 import { FieldValues, useForm } from 'react-hook-form'
 import { setUser } from '../model/slice'
 import { checkAvailableEmail, signUp } from '../api'
+import { Form, type FormValues } from 'entities/form'
+import { useNavigate } from 'react-router-dom'
+import { createTokens } from 'shared/api'
 
-export const Form = () => {
+export const SignUpForm = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  type FormValues = {
-    email: string,
-    password: string
-  }
-
-  const { register, handleSubmit, formState: { errors }, setError } = useForm<FormValues>()
+  const { formState: { errors }, setError, clearErrors} = useForm<FormValues>()
 
   const onSubmit = async ({email, password}: FieldValues): Promise<void> => {
     try {
+
       const is_available: boolean = await checkAvailableEmail(email)
-      if (!is_available) {
-        setError('email', { type: 'exists', message: 'User already exists' })
-        return
-      }
+
+      if (!is_available) { setError('email', { type: 'exists', message: 'User already exists' }); return }
       await signUp(email, password)
+      await createTokens(email, password)
       dispatch(setUser({email, password}))
-    } catch (err) {
-      setError('email', { type: 'internet', message: 'Something went wrong. Try later' })
+      clearErrors("email")
+      navigate('../books')
+    } catch (err: any) { 
+      setError('email', { type: 'internet', message: err.response.data.email ? err.response.data.email : `${err.response.statusText}. Please try later` });
+      setTimeout(() => clearErrors("email"), 2000)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="email">email</label>
-      <input
-        id="email"
-        {...register("email", {
-          required: "required",
-          pattern: {
-            value: /\S+@\S+\.\S+/,
-            message: "Entered value does not match email format",
-          },
-        })}
-        type="email"
-      />
-      {errors.email && 
-        <p>{errors.email.message}</p>}
-      <label htmlFor="password">password</label>
-      <input
-        id="password"
-        {...register("password", { required: true})}
-      />
-        {errors.password && 
-        <p>{errors.password.message}</p>}
-      <input type="submit" />
-    </form>
+      <Form onSubmit={onSubmit} apiErrors={errors}/>
   )
 }

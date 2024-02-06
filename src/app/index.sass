@@ -1,9 +1,30 @@
 @import 'shared/ui/colors'
+@import 'shared/ui/scales'
     
 body
     color: $black
     margin: 0
     padding: 0
+    font-family: "Gill Sans", sans-serif
+
+*
+    box-sizing: border-box
+
+
+h1 
+    margin: 0
 
 html
     scroll-behavior: smooth
+
+a
+    text-decoration: none
+    color: $black
+
+.screen
+    margin-top: 20px
+    padding: $p
+    min-height: calc( 100vh - 80px - 20px - 100px)
+    width: 100%
+    display: flex
+    align-items: center

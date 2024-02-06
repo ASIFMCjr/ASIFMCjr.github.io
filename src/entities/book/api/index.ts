@@ -24,6 +24,6 @@ export interface Book {
     release_date: string | Date;
 }
 
-export const getBooks = async (page_id?: string): Promise<Books> => axiosInstance.get(page_id ? `api/books/?page=${page_id}` : 'api/books').then(res => res.data)
+export const getBooks = async (page_id?: string): Promise<Books> => (await axiosInstance.get(page_id ? `api/books/?page=${page_id}` : 'api/books')).data
 
-export const getBook = async (id: string): Promise<Book> => axiosInstance.get(`api/books/${Number(id)}`).then(res => res.data)
+export const getBook = async (id: string): Promise<Book> => (await axiosInstance.get(`api/books/${Number(id)}`)).data

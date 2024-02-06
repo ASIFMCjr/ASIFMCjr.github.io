@@ -56,7 +56,7 @@ const usePagination = ({ pages, sibling_count = 2, current_page, DOTS }: paginat
   };
 
 
-export const Pagination = ({ pages, current_page, sibling_count=2 }: paginationProps) => {
+export const Pagination: React.FC<paginationProps> = ({ pages, current_page, sibling_count=2 }) => {
 
     const DOTS = 0
 
