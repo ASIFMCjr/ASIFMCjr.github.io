@@ -6,29 +6,37 @@ export interface Token {
     access: string;
 }
 
+const baseUrl = {
+    baseURL: 'http://localhost:3000'
+}
+
 export const getToken = async (): Promise<string> => {
 
     const access = localStorage.getItem('access')
+    const data = (await axios.post('api/token/verify/', {token: access}, baseUrl)).data
+    
+    if (!data) return (await revokeToken()).access
 
-    return access ? access : (await revokeToken()).access
+    return access ? access : ''
 }
 
 export const createTokens = async (email: string, password: string): Promise<Token> => {
 
-    return axios.post<Token>('api/token/', {
-        email: email,
-        password: password
-    }).then(res => {
-        localStorage.setItem('access', res.data.access)
-        Cookies.set('refresh', res.data.refresh)
-
-        return res.data
-    }).catch(err => err)
+    const data = (await axios.post<Token>('api/token/', { email, password }, baseUrl)).data
+    
+    localStorage.setItem('access', data.access)
+    Cookies.set('refresh', data.refresh)
+    
+    return data
 }
 
 export const revokeToken = async (): Promise<Token> => {
 
     const refresh = Cookies.get('refresh')
+    const data = (await axios.post<Token>('api/token/refresh/', { refresh }, baseUrl)).data
+    
+    localStorage.setItem('access', data.access)
+    Cookies.set('refresh', data.refresh)
 
-    return axios.post<Token>('api/token/refresh', {refresh: refresh }).then(res => res.data)
+    return data
 }

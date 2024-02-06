@@ -1,16 +1,42 @@
 @import 'shared/ui/colors'
+@import 'shared/ui/scales'
     
 .header
     position: sticky
     top: 0
     background-color: $primary-color
     box-sizing: border-box
-    padding: 20px
+    padding: 0 $p
     height: 80px
     display: flex
     flex-direction: row
     align-items: center
     justify-content: space-between
+    color: $white
+    font-size: 1rem
 
-    h1 
-        margin: 0
+    a
+        color: $white
+
+    .reverse
+        display: inline-block
+        transform: scale(-1, 1)
+        font-size: 3rem
+
+
+    .header-logo
+        width: 25%
+
+    .header-search
+        width: 50%
+
+    .header-nav
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        width: 25%
+        margin-left: 5%
+
+        *
+            &:hover
+                color: color-mix(in srgb, $white 90%, $black)

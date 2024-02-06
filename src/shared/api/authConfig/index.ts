@@ -1,14 +1,16 @@
 import axios from "axios";
-import { getToken, revokeToken } from "shared/api";
+import { revokeToken } from "shared/api";
 
-export const axiosInstance = axios.create();
+export const axiosInstance = axios.create({
+  baseURL: 'http://localhost:3000/'
+});
   
   axiosInstance.interceptors.request.use(async (config) => {
 
-      const token: string = await getToken()
+      const token: string = localStorage.getItem('access')!
       const auth: string = token ? `Bearer ${token}` : '';
 
-      config.headers.common['Authorization'] = auth;
+      config.headers['Authorization'] = auth;
 
       return config;
     }, error => Promise.reject(error)
@@ -16,12 +18,7 @@ export const axiosInstance = axios.create();
 
   axiosInstance.interceptors.response.use(response => response, async (error) => {
 
-        if (error.response && error.response.status === 401) {
-            return (await revokeToken()).access
-        }
+        if (error.response && error.response.status === 401) (await revokeToken()).access
 
         Promise.reject(error)
     });
-//   access in local storage
-//   refresh in cookies
-//   in slice redux add user

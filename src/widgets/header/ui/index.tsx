@@ -1,14 +1,19 @@
 import React from 'react'
 import './index.sass'
+import { SearchBar } from 'entities/search'
 
 export const Header = () => {
     return (
         <div className="header">
-                <div><a href='/'>asd</a></div>
-                <div className="">asd</div>
+                <div className="header-logo"><a href='/' className='reverse'>book</a></div>
+                <div className="header-search">
+                    <SearchBar/>
+                </div>
                 <div className="header-nav">
-                    <div className="">a</div>
-                    <div className="">b</div>
+                    <a href='/'>Main</a>
+                    <a href='/books'>Books</a>
+                    <a href='/authors'>Authors</a>
+                    <a href='/auth'>Auth</a>
                 </div>
         </div>
     )
