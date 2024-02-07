@@ -1,6 +1,7 @@
 import React from 'react'
 import { FieldErrors, SubmitHandler, useForm } from 'react-hook-form'
 import './index.sass'
+import { Button } from 'shared/ui/'
 
 export type FormValues = {
     email: string,
@@ -42,7 +43,8 @@ export const Form: React.FC<FormProps> = ({ onSubmit, apiErrors }) => {
       />
         
         {errors.password?.type === 'required' && <p className='error'>{errors.password?.message}</p>}
-      <input type="submit" className='mt form-btn'/>
+      {/* <input type="submit" className='mt form-btn'/> */}
+      <Button submit text="submit"/>
     </form>
   )
 }
