@@ -1,5 +1,5 @@
 import axios from "axios";
-import { revokeToken } from "shared/api";
+import { getToken, revokeToken } from "shared/api";
 
 export const axiosInstance = axios.create({
   baseURL: 'http://localhost:3000/'
@@ -7,7 +7,7 @@ export const axiosInstance = axios.create({
   
   axiosInstance.interceptors.request.use(async (config) => {
 
-      const token: string = localStorage.getItem('access')!
+      const token: string = await getToken()
       const auth: string = token ? `Bearer ${token}` : '';
 
       config.headers['Authorization'] = auth;

@@ -1,4 +1,4 @@
-import { bookApi } from 'entities/book'
+import { BookItem, bookApi } from 'entities/book'
 import { Pagination } from 'entities/pagination'
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
@@ -22,9 +22,7 @@ export const Book = () => {
             return (
               <Link to={`${book.id}`} onClick={() => scrollTo({top: 0, left: 0, behavior: 'smooth'})} key={book.id}>
                 
-                  <p>{book.price}</p>
-                  <p>{book.title}</p>
-                  {/* Buy button */}
+                  <BookItem {...book}/>
                 
               </Link>
             )

@@ -14,6 +14,7 @@ export const Header = () => {
                     <a href='/books'>Books</a>
                     <a href='/authors'>Authors</a>
                     <a href='/auth'>Auth</a>
+                    <a href='/cart'>Cart</a>
                 </div>
         </div>
     )
