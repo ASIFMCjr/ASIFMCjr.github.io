@@ -1,6 +1,6 @@
-import React from 'react';
-import { Book } from '../api';
-import './index.sass';
+import React from 'react'
+import { Book } from '../api'
+import './index.sass'
 
 export const BookItem: React.FC<Book> = ({ title, price }) => {
 	return (
@@ -8,5 +8,5 @@ export const BookItem: React.FC<Book> = ({ title, price }) => {
 			<div>{title}</div>
 			<div>{price} p</div>
 		</div>
-	);
-};
+	)
+}

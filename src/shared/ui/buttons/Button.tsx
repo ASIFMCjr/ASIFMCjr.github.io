@@ -1,11 +1,11 @@
-import React from 'react';
-import './index.sass';
+import React from 'react'
+import './index.sass'
 
 type ButtonProps = {
-	text: string;
-	submit?: boolean;
-	onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
-};
+	text: string
+	submit?: boolean
+	onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined
+}
 
 export const Button: React.FC<ButtonProps> = ({ text, submit, onClick }) => {
 	return (
@@ -18,5 +18,5 @@ export const Button: React.FC<ButtonProps> = ({ text, submit, onClick }) => {
 				</button>
 			)}
 		</div>
-	);
-};
+	)
+}

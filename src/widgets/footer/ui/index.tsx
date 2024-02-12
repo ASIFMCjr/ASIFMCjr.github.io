@@ -1,5 +1,5 @@
-import React from 'react';
-import './index.sass';
+import React from 'react'
+import './index.sass'
 
 export const Footer = () => {
 	return (
@@ -28,5 +28,5 @@ export const Footer = () => {
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+}

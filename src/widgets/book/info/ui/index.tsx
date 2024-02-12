@@ -1,42 +1,42 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Button } from 'shared/ui';
-import './index.sass';
-import favorite from 'assets/favorite.svg';
-import { favoritesApi } from 'entities/favorites';
-import { Counter } from 'shared/ui/inputs/counter';
-import { useAppDispatch, useAppSelector } from 'shared/model/hooks';
-import { fetchCartList, fetchUpdateCart } from 'entities/cart/model/slice';
+import React, { useEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { Button } from 'shared/ui'
+import './index.sass'
+import favorite from 'assets/favorite.svg'
+import { favoritesApi } from 'entities/favorites'
+import { Counter } from 'shared/ui/inputs/counter'
+import { useAppDispatch, useAppSelector } from 'shared/model/hooks'
+import { fetchCartList, fetchUpdateCart } from 'entities/cart/model/slice'
 
 export const Book = () => {
-	const dispatch = useAppDispatch();
-	const { state } = useLocation();
+	const dispatch = useAppDispatch()
+	const { state } = useLocation()
 
-	const { book } = state;
+	const { book } = state
 
-	const [amount, setAmount] = useState<number>(0);
+	const [amount, setAmount] = useState<number>(0)
 
 	const baseAmount = useAppSelector(
 		(state) => state.cart.cartList
-	).products.filter((item) => item.book_id === book?.id)[0]?.amount;
+	).products.filter((item) => item.book_id === book?.id)[0]?.amount
 
-	const initialRender = useRef<number>(0);
+	const initialRender = useRef<number>(0)
 
 	const handleChange = async () =>
-		dispatch(fetchUpdateCart({ book_id: book.id, amount: amount }));
+		dispatch(fetchUpdateCart({ book_id: book.id, amount: amount }))
 
 	useEffect(() => {
-		dispatch(fetchCartList());
-	}, []);
+		dispatch(fetchCartList())
+	}, [])
 	useEffect(() => {
-		setAmount(baseAmount);
-	}, [baseAmount]);
+		setAmount(baseAmount)
+	}, [baseAmount])
 
 	useEffect(() => {
-		console.log(amount);
-		if (initialRender.current === 3) handleChange();
-		else initialRender.current += 1;
-	}, [amount]);
+		console.log(amount)
+		if (initialRender.current === 3) handleChange()
+		else initialRender.current += 1
+	}, [amount])
 
 	return (
 		<div className="info" key={book?.id}>
@@ -56,8 +56,8 @@ export const Book = () => {
 								<Button
 									text="Add to Cart"
 									onClick={() => {
-										dispatch(fetchUpdateCart({ book_id: book.id, amount: 1 }));
-										setAmount(1);
+										dispatch(fetchUpdateCart({ book_id: book.id, amount: 1 }))
+										setAmount(1)
 									}}
 								/>
 							)}
@@ -72,5 +72,5 @@ export const Book = () => {
 				</>
 			)}
 		</div>
-	);
-};
+	)
+}

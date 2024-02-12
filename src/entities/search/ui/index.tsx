@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import search from 'assets/search.svg';
-import './index.sass';
+import React, { useState } from 'react'
+import search from 'assets/search.svg'
+import './index.sass'
 
 export const SearchBar = () => {
-	const [input, setInput] = useState<string>('');
+	const [input, setInput] = useState<string>('')
 	const handleSubmit = (e: React.SyntheticEvent) => {
-		e.preventDefault();
-		alert(input);
-	};
+		e.preventDefault()
+		alert(input)
+	}
 	return (
 		<form className="search" onSubmit={handleSubmit}>
 			<input
@@ -24,5 +24,5 @@ export const SearchBar = () => {
 				src={search}
 			/>
 		</form>
-	);
-};
+	)
+}

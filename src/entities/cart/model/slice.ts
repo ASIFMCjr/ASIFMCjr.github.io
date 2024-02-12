@@ -1,5 +1,5 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { cartApi } from '..';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { cartApi } from '..'
 
 const initialState: { cartItem: cartApi.CartItem; cartList: cartApi.CartList } =
 	{
@@ -21,22 +21,22 @@ const initialState: { cartItem: cartApi.CartItem; cartList: cartApi.CartList } =
 			book_id: 0,
 			amount: 0,
 		},
-	};
+	}
 
 export const fetchCartList = createAsyncThunk<cartApi.CartList>(
 	'cart/fetchCartList',
 	async () => await cartApi.getCartList()
-);
+)
 
 export const fetchCartItem = createAsyncThunk<cartApi.CartItem, number>(
 	'cart/fetchCartItem',
 	async (id) => await cartApi.getCartItem(id)
-);
+)
 
 export const fetchUpdateCart = createAsyncThunk<
 	cartApi.CartItem,
 	cartApi.PrimitiveCart
->('cart/fetchUpdateCart', async (item) => await cartApi.updateCart(item));
+>('cart/fetchUpdateCart', async (item) => await cartApi.updateCart(item))
 
 const cartSlice = createSlice({
 	name: 'cart',
@@ -48,22 +48,22 @@ const cartSlice = createSlice({
 		builder.addCase(
 			fetchCartList.fulfilled,
 			(state, action: PayloadAction<cartApi.CartList>) => {
-				state.cartList = action.payload;
+				state.cartList = action.payload
 			}
 		),
 			builder.addCase(
 				fetchCartItem.fulfilled,
 				(state, action: PayloadAction<cartApi.CartItem>) => {
-					state.cartItem = action.payload;
+					state.cartItem = action.payload
 				}
 			),
 			builder.addCase(
 				fetchUpdateCart.fulfilled,
 				(state, action: PayloadAction<cartApi.CartItem>) => {
-					state.cartItem = action.payload;
+					state.cartItem = action.payload
 				}
-			);
+			)
 	},
-});
+})
 
-export default cartSlice.reducer;
+export default cartSlice.reducer

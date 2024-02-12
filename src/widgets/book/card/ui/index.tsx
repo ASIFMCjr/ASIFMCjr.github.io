@@ -1,13 +1,13 @@
-import { BookItem, bookApi } from 'entities/book';
-import { Pagination } from 'entities/pagination';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './index.sass';
-import { useAppSelector } from 'shared/model/hooks';
+import { BookItem, bookApi } from 'entities/book'
+import { Pagination } from 'entities/pagination'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import './index.sass'
+import { useAppSelector } from 'shared/model/hooks'
 
 export const Book = () => {
 	// const [books, setBooks] = useState
-	const books = useAppSelector((state) => state.books.booksInfo);
+	const books = useAppSelector((state) => state.books.booksInfo)
 
 	return (
 		<div className="book_cards">
@@ -22,11 +22,11 @@ export const Book = () => {
 						>
 							<BookItem {...book} />
 						</Link>
-					);
+					)
 				})}
 			</div>
 
 			<Pagination pages={books?.total_pages} current_page={books?.page} />
 		</div>
-	);
-};
+	)
+}

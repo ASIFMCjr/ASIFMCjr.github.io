@@ -1,23 +1,23 @@
-import React from 'react';
-import { FieldErrors, SubmitHandler, useForm } from 'react-hook-form';
-import './index.sass';
-import { Button } from 'shared/ui/';
+import React from 'react'
+import { FieldErrors, SubmitHandler, useForm } from 'react-hook-form'
+import './index.sass'
+import { Button } from 'shared/ui/'
 
 export type FormValues = {
-	email: string;
-	password: string;
-};
+	email: string
+	password: string
+}
 
 type FormProps = {
-	onSubmit: SubmitHandler<FormValues>;
-	apiErrors: FieldErrors<FormValues>;
-};
+	onSubmit: SubmitHandler<FormValues>
+	apiErrors: FieldErrors<FormValues>
+}
 export const Form: React.FC<FormProps> = ({ onSubmit, apiErrors }) => {
 	const {
 		handleSubmit,
 		register,
 		formState: { errors },
-	} = useForm<FormValues>();
+	} = useForm<FormValues>()
 
 	return (
 		<form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -50,5 +50,5 @@ export const Form: React.FC<FormProps> = ({ onSubmit, apiErrors }) => {
 
 			<Button submit text="submit" />
 		</form>
-	);
-};
+	)
+}

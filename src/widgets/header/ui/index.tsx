@@ -1,6 +1,6 @@
-import React from 'react';
-import './index.sass';
-import { SearchBar } from 'entities/search';
+import React from 'react'
+import './index.sass'
+import { SearchBar } from 'entities/search'
 
 export const Header = () => {
 	return (
@@ -21,5 +21,5 @@ export const Header = () => {
 				<a href="/cart">Cart</a>
 			</div>
 		</div>
-	);
-};
+	)
+}

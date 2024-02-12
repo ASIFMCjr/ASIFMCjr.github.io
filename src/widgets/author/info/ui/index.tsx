@@ -1,17 +1,17 @@
-import { authorApi } from 'entities/author';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { authorApi } from 'entities/author'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 export const AuthorInfo = () => {
-	const [author, setAuthor] = useState<authorApi.Author>();
+	const [author, setAuthor] = useState<authorApi.Author>()
 
-	const { authorId } = useParams();
+	const { authorId } = useParams()
 
 	useEffect(() => {
 		const initLoad = async () =>
-			setAuthor(await authorApi.getAuthor(Number(authorId)));
-		initLoad();
-	}, []);
+			setAuthor(await authorApi.getAuthor(Number(authorId)))
+		initLoad()
+	}, [])
 
 	return (
 		<div>
@@ -21,5 +21,5 @@ export const AuthorInfo = () => {
 				</li>
 			</ul>
 		</div>
-	);
-};
+	)
+}

@@ -1,5 +1,5 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { User } from '../api';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { User } from '../api'
 
 const initialState: { user: User } = {
 	user: {
@@ -12,16 +12,16 @@ const initialState: { user: User } = {
 		date_joined: undefined,
 		last_login: undefined,
 	},
-};
+}
 const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
 		setUser: (state, action: PayloadAction<User>) => {
-			state.user = action.payload;
+			state.user = action.payload
 		},
 	},
-});
+})
 
-export default userSlice.reducer;
-export const { setUser } = userSlice.actions;
+export default userSlice.reducer
+export const { setUser } = userSlice.actions

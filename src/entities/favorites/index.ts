@@ -1,1 +1,1 @@
-export * as favoritesApi from './api';
+export * as favoritesApi from './api'
