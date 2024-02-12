@@ -16,10 +16,11 @@ export const Footer = () => {
             <div className="footer-section">
                 <h1 className="footer-section__heading">Pages</h1>
                 <div className="footer-section__list">
-                    <a href='/'>Main</a>
+                    {/* <a href='/'>Main</a> */}
                     <a href='/books'>Books</a>
                     <a href='/authors'>Authors</a>
                     <a href='/auth'>Authorization</a>
+                    <a href="/cart">Cart</a>
                 </div>
             </div>
         </div>

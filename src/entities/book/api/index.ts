@@ -24,6 +24,21 @@ export interface Book {
     release_date: string | Date;
 }
 
-export const getBooks = async (page_id?: string): Promise<Books> => (await axiosInstance.get(page_id ? `api/books/?page=${page_id}` : 'api/books')).data
+export interface GetBookParams extends Partial<Omit<Book, 'author' | 'genres' | 'id' | 'description' | 'in_stock'>> {
+    page_size?: number;
+    page?: number;
+    genre?: string;
+    author?: string;
+    price_gte?: number;
+    price_lte?: number;
+    release_date_gte?: string;
+    release_date_lte?: string;
+    writing_date_gte?: string;
+    writing_date_lte?: string;
+    ordering?: string;
+}
 
-export const getBook = async (id: string): Promise<Book> => (await axiosInstance.get(`api/books/${Number(id)}`)).data
+
+export const getBooks = async (props?: GetBookParams): Promise<Books> => (await axiosInstance.get(`api/books/`, {params: props})).data
+
+export const getBook = async (id: number): Promise<Book> => (await axiosInstance.get(`api/books/${id}`)).data

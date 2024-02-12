@@ -9,7 +9,7 @@ export const AuthorInfo = () => {
   const { authorId } = useParams();
 
   useEffect(() => {
-    const initLoad = async () => setAuthor(await authorApi.getAuthor(authorId || ''))
+    const initLoad = async () => setAuthor(await authorApi.getAuthor(Number(authorId)))
     initLoad()
   }, [])
 

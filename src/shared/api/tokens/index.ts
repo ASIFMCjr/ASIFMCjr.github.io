@@ -13,9 +13,13 @@ const baseUrl = {
 export const getToken = async (): Promise<string> => {
 
     const access = localStorage.getItem('access')
-    const data = (await axios.post('api/token/verify/', {token: access}, baseUrl)).data
+    try {
+        const data = (await axios.post('api/token/verify/', {token: access}, baseUrl)).data
+        if (!data) return (await revokeToken())
+    } catch (err) {
+        return ''
+    }
     
-    if (!data) return (await revokeToken()).access
 
     return access ? access : ''
 }
@@ -30,13 +34,12 @@ export const createTokens = async (email: string, password: string): Promise<Tok
     return data
 }
 
-export const revokeToken = async (): Promise<Token> => {
+export const revokeToken = async (): Promise<string> => {
 
     const refresh = Cookies.get('refresh')
-    const data = (await axios.post<Token>('api/token/refresh/', { refresh }, baseUrl)).data
+    const { access } = (await axios.post<Token>('api/token/refresh/', { refresh }, baseUrl)).data
     
-    localStorage.setItem('access', data.access)
-    Cookies.set('refresh', data.refresh)
+    localStorage.setItem('access', access)
 
-    return data
+    return access
 }

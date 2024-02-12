@@ -10,7 +10,7 @@ export const Header = () => {
                     <SearchBar/>
                 </div>
                 <div className="header-nav">
-                    <a href='/'>Main</a>
+                    {/* <a href='/'>Main</a> */}
                     <a href='/books'>Books</a>
                     <a href='/authors'>Authors</a>
                     <a href='/auth'>Auth</a>

@@ -18,6 +18,6 @@ export interface Author {
     second_name: string;
 }
 
-export const getAuthors = async (page_id?: string): Promise<Authors> => (await axiosInstance.get(page_id ? `api/authors/?page=${page_id}` : 'api/authors')).data
+export const getAuthors = async (page_size?: number, page?: number): Promise<Authors> => (await axiosInstance.get(`api/authors/${page_size ? '?page_size=' + page_size : ''}${page ? '?page=' + page : ''}`)).data
 
-export const getAuthor = async (id: string): Promise<Author> => (await axiosInstance.get(`api/authors/${Number(id)}`)).data
+export const getAuthor = async (id: number): Promise<Author> => (await axiosInstance.get(`api/authors/${id}`)).data

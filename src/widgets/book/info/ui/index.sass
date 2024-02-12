@@ -1,0 +1,34 @@
+@import 'shared/ui/colors'
+@import 'shared/ui/scales'
+
+.info
+    margin: auto
+    display: flex
+    flex-direction: row
+    max-width: 1000px
+
+.info-left
+    display: flex
+    flex-direction: column
+    place-items: left
+    padding: $p
+
+.info-right
+    display: flex
+    flex-direction: column
+    place-items: left
+    width: 30%
+    padding: $p
+    border-radius: 10px
+    box-shadow: 0px 5px 9px 0px color-mix(in srgb, $white 90%, $black)
+
+.info-right__add
+    display: flex
+    flex-direction: row
+
+.info-right__add_img
+    margin-left: 20px
+    height: 40px
+    width: 40px
+    &:hover
+        fill: red

@@ -1,8 +1,13 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
+import { Navigate } from "react-router-dom"
+import { getToken } from "shared/api"
 export const MainPage = () => {
+  const [isLogged, setIsLogged] = useState<string>('')
+  useEffect(() => {
+    const initCheck = async () => setIsLogged(await getToken() ? '/books' : '/auth')
+    initCheck()
+  },[])
   return (
-    <div>MainPage</div>
+    <Navigate to={isLogged} replace/>
   )
 }
-
-// Books list from widgets -> book from entities -> ui from shared

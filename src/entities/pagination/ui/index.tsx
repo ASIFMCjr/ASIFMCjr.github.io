@@ -1,9 +1,13 @@
 import React, { useMemo } from 'react'
-import { useNavigate } from 'react-router-dom';
+import './index.sass'
+import leftArrow from 'assets/leftArrow.svg'
+import rightArrow from 'assets/rightArrow.svg'
+import { useAppDispatch } from 'shared/model/hooks';
+import { fetchBooks } from 'entities/book';
 
 type paginationProps = { pages: number, current_page: number, sibling_count?: number }
 
-const usePagination = ({ pages, sibling_count = 2, current_page, DOTS }: paginationProps & {DOTS: number}) => {
+const usePagination = ({ pages, sibling_count = 1, current_page, DOTS }: paginationProps & {DOTS: number}) => {
 
     const paginationRange = useMemo(() => {
         const range = (start: number, end: number) => {
@@ -56,48 +60,58 @@ const usePagination = ({ pages, sibling_count = 2, current_page, DOTS }: paginat
   };
 
 
-export const Pagination: React.FC<paginationProps> = ({ pages, current_page, sibling_count=2 }) => {
+export const Pagination: React.FC<paginationProps> = ({ pages, current_page, sibling_count=1 }) => {
 
     const DOTS = 0
 
     const paginationRange = usePagination({ pages, sibling_count, current_page, DOTS })!
     
-    const navigate = useNavigate()
+    // const page_params = useLocation()
+
+    const dispatch = useAppDispatch()
+
+    // const params = new URLSearchParams(page_params.search)
+    
+    // const navigate = useNavigate()
     
       if (current_page === 0 || paginationRange.length < 2) {
         return null;
       }
     
       const onNext = () => {
-        navigate(`?page=${current_page + 1}`)
+        // params.set('page', String(current_page + 1))
+        // navigate(`?${params.toString()}`)
+        dispatch(fetchBooks({page: current_page + 1}))
         scrollTo({top: 0, left: 0, behavior: 'smooth'})
       };
     
       const onPrevious = () => {
-        navigate(`?page=${current_page - 1}`)
+        // params.set('page', String(current_page - 1))
+        // navigate(`?${params.toString()}`)
+        dispatch(fetchBooks({page: current_page - 1}))
         scrollTo({top: 0, left: 0, behavior: 'smooth'})
       };
     
       const lastPage = paginationRange[paginationRange.length - 1];
       return (
-        <div>
+        <div className='pagination'>
            
           {current_page !== 1 && (
-            <button onClick={onPrevious}>
-                <div className="arrow left" />
-            </button>
+                <img src={leftArrow} height={10} className="arrow left" onClick={onPrevious}/>
           )}
 
           {paginationRange.map(pageNumber => {
              
             if (pageNumber === DOTS) {
-              return <div key='dot' className="pagination-item dots">&#8230;</div>;
+              return <span key='dot' className="dots">&#8230;</span>;
             }
             
             return (
-              <button key={pageNumber} 
+              <button className={`pagination-item ${pageNumber === current_page ? 'active' : ''}`} key={pageNumber}
                 onClick={() => {
-                    navigate(`?page=${pageNumber}`)
+                  // params.set('page', String(pageNumber))
+                  // navigate(`?${params.toString()}`)
+                    dispatch(fetchBooks({page: pageNumber}))
                     scrollTo({top: 0, left: 0, behavior: 'smooth'})
                 }}>
                 {pageNumber}
@@ -106,9 +120,7 @@ export const Pagination: React.FC<paginationProps> = ({ pages, current_page, sib
           })}
 
           {current_page !== lastPage && (
-            <button onClick={onNext}>
-                <div className="arrow right" />
-            </button>
+                <img src={rightArrow} height={10} className="arrow right" onClick={onNext}/>
           )}
         </div>
       );

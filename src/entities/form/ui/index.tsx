@@ -44,7 +44,7 @@ export const Form: React.FC<FormProps> = ({ onSubmit, apiErrors }) => {
         
         {errors.password?.type === 'required' && <p className='error'>{errors.password?.message}</p>}
       {/* <input type="submit" className='mt form-btn'/> */}
-      <Button submit text="submit"/>
+      <Button submit text="submit" onClick={undefined}/>
     </form>
   )
 }
