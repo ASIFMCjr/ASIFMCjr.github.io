@@ -1,2 +1,2 @@
-export { axiosInstance } from './authConfig'
-export { getToken, revokeToken, createTokens, type Token } from './tokens'
+export { axiosInstance } from './authConfig';
+export { getToken, revokeToken, createTokens, type Token } from './tokens';

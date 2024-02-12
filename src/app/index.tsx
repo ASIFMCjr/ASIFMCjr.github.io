@@ -1,20 +1,20 @@
-import React from 'react'
-import { Routing } from 'pages'
-import { Header } from 'widgets/header'
-import { Footer } from 'widgets/footer'
-import './index.sass'
-import { Provider } from 'react-redux'
-import { store } from 'app/store'
+import React from 'react';
+import { Routing } from 'pages';
+import { Header } from 'widgets/header';
+import { Footer } from 'widgets/footer';
+import './index.sass';
+import { Provider } from 'react-redux';
+import { store } from 'app/store';
 function App() {
-  return (
-    <Provider store={store}>
-      <Header/>
-      <div className='screen'>
-        <Routing />
-      </div>
-      <Footer/>
-    </Provider>
-  )
+	return (
+		<Provider store={store}>
+			<Header />
+			<div className="screen">
+				<Routing />
+			</div>
+			<Footer />
+		</Provider>
+	);
 }
 
-export default App
+export default App;
