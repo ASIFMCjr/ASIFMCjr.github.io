@@ -51,7 +51,11 @@ export const Book = () => {
 						<p>in stock {book.in_stock}</p>
 						<div className="info-right__add">
 							{amount ? (
-								<Counter amount={amount} setAmount={setAmount} />
+								<Counter
+									max={book.in_stock}
+									amount={amount}
+									setAmount={setAmount}
+								/>
 							) : (
 								<Button
 									text="Add to Cart"

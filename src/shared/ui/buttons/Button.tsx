@@ -4,7 +4,7 @@ import './index.sass'
 type ButtonProps = {
 	text: string
 	submit?: boolean
-	onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined
+	onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 export const Button: React.FC<ButtonProps> = ({ text, submit, onClick }) => {

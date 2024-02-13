@@ -44,7 +44,9 @@ export const getCartItem = async (id: number): Promise<CartItem> =>
 export const checkValidZipcode = async (zipcode: number): Promise<boolean> =>
 	(await axiosInstance.get('api/cart/check_zipcode/', { params: { zipcode } }))
 		.data.is_valid
-export const updateCart = async (item: PrimitiveCart): Promise<CartItem> =>
+export const updateCart = async (
+	item: PrimitiveCart
+): Promise<Array<CartItem>> =>
 	(await axiosInstance.patch('api/cart/update_cart/', { cart: [item] })).data
 export const makeOrder = async (address: CartAddress): Promise<Order> =>
 	(await axiosInstance.post('api/cart/make_order/', address)).data

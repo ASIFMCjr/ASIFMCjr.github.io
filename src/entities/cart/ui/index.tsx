@@ -13,17 +13,19 @@ export const CartCard: React.FC<{ key?: number; cart: cartApi.CartItem }> = ({
 	const dispatch = useAppDispatch()
 	const [amount, setAmount] = useState<number>(cart.amount)
 	const [book, setBook] = useState<bookApi.Book>()
-
+	// const cartToCheck = useAppSelector((state) => state.cart.cartList).products
 	const initialRender = useRef<number>(0)
 
-	const handleChange = async () =>
-		dispatch(fetchUpdateCart({ book_id: cart.book_id, amount: amount }))
+	const handleChange = (am: number) => {
+		dispatch(fetchUpdateCart({ book_id: cart.book_id, amount: am }))
+	}
 
 	useEffect(() => {
-		console.log(amount)
-		if (initialRender.current === 2) handleChange()
+		if (initialRender.current === 2) handleChange(amount)
 		else initialRender.current += 1
 	}, [amount])
+
+	// useEffect(() => console.log(cartToCheck[0], amount), [cartToCheck])
 
 	useEffect(() => {
 		const initLoad = async () => setBook(await bookApi.getBook(cart.book_id))
@@ -32,16 +34,16 @@ export const CartCard: React.FC<{ key?: number; cart: cartApi.CartItem }> = ({
 
 	return (
 		<>
-			{amount ? (
-				<div className="cartItem">
-					<Link to={`/books/${cart.book_id}`} state={{ book }}>
-						<p>{book?.title}</p>
-					</Link>
-					<Counter amount={amount} setAmount={setAmount} />
-				</div>
-			) : (
-				''
-			)}
+			<div className="cartItem">
+				<Link to={`/books/${cart.book_id}`} state={{ book }}>
+					<p>{book?.title}</p>
+				</Link>
+				<Counter
+					max={book ? book.in_stock : 1}
+					amount={amount}
+					setAmount={setAmount}
+				/>
+			</div>
 		</>
 	)
 }
