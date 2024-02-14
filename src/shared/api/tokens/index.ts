@@ -1,42 +1,50 @@
-import axios from "axios"
-import Cookies from "js-cookie";
+import axios from 'axios'
+import Cookies from 'js-cookie'
 
 export interface Token {
-    refresh: string;
-    access: string;
+	refresh: string
+	access: string
 }
 
 const baseUrl = {
-    baseURL: 'http://localhost:3000'
+	baseURL: 'http://localhost:3000',
 }
 
 export const getToken = async (): Promise<string> => {
+	const access = localStorage.getItem('access')
+	try {
+		const data = (
+			await axios.post('api/token/verify/', { token: access }, baseUrl)
+		).data
+		if (!data) return await revokeToken()
+	} catch (err) {
+		return ''
+	}
 
-    const access = localStorage.getItem('access')
-    const data = (await axios.post('api/token/verify/', {token: access}, baseUrl)).data
-    
-    if (!data) return (await revokeToken()).access
-
-    return access ? access : ''
+	return access ? access : ''
 }
 
-export const createTokens = async (email: string, password: string): Promise<Token> => {
+export const createTokens = async (
+	email: string,
+	password: string
+): Promise<Token> => {
+	const data = (
+		await axios.post<Token>('api/token/', { email, password }, baseUrl)
+	).data
 
-    const data = (await axios.post<Token>('api/token/', { email, password }, baseUrl)).data
-    
-    localStorage.setItem('access', data.access)
-    Cookies.set('refresh', data.refresh)
-    
-    return data
+	localStorage.setItem('access', data.access)
+	Cookies.set('refresh', data.refresh)
+
+	return data
 }
 
-export const revokeToken = async (): Promise<Token> => {
+export const revokeToken = async (): Promise<string> => {
+	const refresh = Cookies.get('refresh')
+	const { access } = (
+		await axios.post<Token>('api/token/refresh/', { refresh }, baseUrl)
+	).data
 
-    const refresh = Cookies.get('refresh')
-    const data = (await axios.post<Token>('api/token/refresh/', { refresh }, baseUrl)).data
-    
-    localStorage.setItem('access', data.access)
-    Cookies.set('refresh', data.refresh)
+	localStorage.setItem('access', access)
 
-    return data
+	return access
 }
