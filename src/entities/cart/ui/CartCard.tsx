@@ -15,10 +15,34 @@ export const CartCard: React.FC<{ key?: number; cart: cartApi.CartItem }> = ({
 	const [book, setBook] = useState<bookApi.Book>()
 	const initialRender = useRef<number>(0)
 
-	const handleChange = (am: number) => {
-		dispatch(fetchUpdateCart({ book_id: cart.book_id, amount: am })).then(() =>
-			dispatch(fetchCartList())
-		)
+	const handleChange = async (am: number) => {
+		await dispatch(fetchUpdateCart({ book_id: cart.book_id, amount: am }))
+		dispatch(fetchCartList())
+	}
+
+	const handleAmount = (param: string, value?: number) => {
+		switch (param) {
+			case 'sub':
+				setAmount((prev) => (0 < prev ? prev - 1 : 0))
+				break
+			case 'add':
+				setAmount((prev) =>
+					(book ? book.in_stock : 1) > prev ? (prev || 0) + 1 : prev
+				)
+				break
+			default:
+				setAmount(
+					value
+						? value <= 0
+							? 0
+							: value >= (book ? book.in_stock : 1)
+								? book
+									? book.in_stock
+									: 1
+								: value
+						: 0
+				)
+		}
 	}
 
 	useEffect(() => {
@@ -39,7 +63,7 @@ export const CartCard: React.FC<{ key?: number; cart: cartApi.CartItem }> = ({
 			<Counter
 				max={book ? book.in_stock : 1}
 				amount={amount}
-				setAmount={setAmount}
+				handleAmount={handleAmount}
 			/>
 		</div>
 	)

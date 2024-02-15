@@ -1,18 +1,20 @@
 import React from 'react'
 import './index.sass'
-export const Counter: React.FC<{
+
+type CounterProps = {
 	amount: number
-	setAmount: React.Dispatch<React.SetStateAction<number>>
+	handleAmount: (param: string, value?: number) => void
 	max: number
-}> = ({ amount, setAmount, max }) => {
+}
+
+export const Counter: React.FC<CounterProps> = ({
+	amount,
+	handleAmount,
+	max,
+}) => {
 	return (
 		<div className="counter">
-			<button
-				className="counter-btns"
-				onClick={() => {
-					setAmount((prev) => (0 < prev ? prev - 1 : 0))
-				}}
-			>
+			<button className="counter-btns" onClick={() => handleAmount('sub')}>
 				-
 			</button>
 			<input
@@ -23,17 +25,9 @@ export const Counter: React.FC<{
 				min={0}
 				max={max}
 				value={amount}
-				onChange={(e) => {
-					const numE = Number(e.target.value)
-					setAmount(numE <= 0 ? 0 : numE >= max ? max : numE)
-				}}
+				onChange={(e) => handleAmount('', Number(e.target.value))}
 			/>
-			<button
-				className="counter-btns"
-				onClick={() => {
-					setAmount((prev) => (max > prev ? (prev || 0) + 1 : prev))
-				}}
-			>
+			<button className="counter-btns" onClick={() => handleAmount('add')}>
 				+
 			</button>
 		</div>

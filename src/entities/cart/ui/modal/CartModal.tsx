@@ -1,10 +1,13 @@
 import React from 'react'
 import './index.sass'
 import { Button } from 'shared/ui'
+import close from 'assets/close.svg'
 export function Modal({ onClose }: { onClose: () => void }) {
 	return (
 		<div className="modal">
-			<p onClick={onClose}>x</p>
+			<button onClick={onClose}>
+				<img src={close} alt="" />
+			</button>
 			<input type="text" placeholder="city" />
 			<input type="text" placeholder="address" />
 			<input type="text" placeholder="zipcode" />

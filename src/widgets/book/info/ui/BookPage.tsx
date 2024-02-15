@@ -25,6 +25,31 @@ export const Book = () => {
 	const handleChange = async () =>
 		dispatch(fetchUpdateCart({ book_id: book.id, amount: amount }))
 
+	const handleAmount = (param: string, value?: number) => {
+		switch (param) {
+			case 'sub':
+				setAmount((prev) => (0 < prev ? prev - 1 : 0))
+				break
+			case 'add':
+				setAmount((prev) =>
+					(book ? book.in_stock : 1) > prev ? (prev || 0) + 1 : prev
+				)
+				break
+			default:
+				setAmount(
+					value
+						? value <= 0
+							? 0
+							: value >= (book ? book.in_stock : 1)
+								? book
+									? book.in_stock
+									: 1
+								: value
+						: 0
+				)
+		}
+	}
+
 	useEffect(() => {
 		dispatch(fetchCartList())
 	}, [])
@@ -54,7 +79,7 @@ export const Book = () => {
 								<Counter
 									max={book.in_stock}
 									amount={amount}
-									setAmount={setAmount}
+									handleAmount={handleAmount}
 								/>
 							) : (
 								<Button
