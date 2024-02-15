@@ -6,14 +6,14 @@ import {
 	Routes,
 } from 'react-router-dom'
 
-import { AuthPage } from './auth'
-import { AuthorsPage } from './authors'
-import { BooksPage } from './books'
-import { CartPage } from './cart'
+import { AuthPage } from './auth/AuthPage'
+import { AuthorsPage } from './authors/AuthorsPage'
+import { BooksPage } from './books/BooksPage'
+import { CartPage } from './cart/CartPage'
 import { BookInfo } from 'widgets/book/info'
-import { ErrorPage } from './error'
+import { ErrorPage } from './error/ErrorPage'
 import { AuthorInfo } from 'widgets/author/info'
-import { MainPage } from './main'
+import { MainPage } from './main/MainPage'
 
 const Root = () => {
 	return (

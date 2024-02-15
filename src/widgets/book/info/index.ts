@@ -1,1 +1,1 @@
-export { Book as BookInfo } from './ui'
+export { Book as BookInfo } from './ui/BookPage'

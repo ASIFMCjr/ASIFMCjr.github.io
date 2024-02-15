@@ -40,6 +40,7 @@ export const createTokens = async (
 
 export const revokeToken = async (): Promise<string> => {
 	const refresh = Cookies.get('refresh')
+
 	const { access } = (
 		await axios.post<Token>('api/token/refresh/', { refresh }, baseUrl)
 	).data

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Book } from '../api'
+import { Book } from '../api/bookApi'
 import './index.sass'
 
 export const BookItem: React.FC<Book> = ({ title, price }) => {

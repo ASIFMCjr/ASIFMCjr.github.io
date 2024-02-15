@@ -1,1 +1,1 @@
-export { Book as BookCard } from './ui'
+export { Book as BookCard } from './ui/BookList'

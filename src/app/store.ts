@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userSlice from 'features/auth/sign-up/model/slice'
-import booksSlice from 'entities/book/model/slice'
-import cartSlice from 'entities/cart/model/slice'
+import booksSlice from 'entities/book/model/bookSlice'
+import cartSlice from 'entities/cart/model/cartSlice'
 
 const rootReducer = {
 	user: userSlice,

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getToken, revokeToken } from 'shared/api'
+import { revokeToken } from 'shared/api'
 
 export const axiosInstance = axios.create({
 	baseURL: 'http://localhost:3000/',
@@ -7,7 +7,7 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
 	async (config) => {
-		const token: string = await getToken()
+		const token: string | null = localStorage.getItem('access')
 		const auth: string = token ? `Bearer ${token}` : ''
 
 		config.headers['Authorization'] = auth
@@ -20,10 +20,9 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
 	(response) => response,
 	async (error) => {
-		if (error.response && error.response.status === 401) {
+		if (error.response.status === 401) {
 			return await revokeToken()
 		}
-
 		Promise.reject(error)
 	}
 )

@@ -1,4 +1,4 @@
-export { BookItem } from './ui'
+export { BookItem } from './ui/BookItem'
 
-export * as bookApi from './api'
-export { fetchBook, fetchBooks } from './model/slice'
+export * as bookApi from './api/bookApi'
+export { fetchBook, fetchBooks } from './model/bookSlice'

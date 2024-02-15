@@ -1,5 +1,5 @@
 import { fetchBooks } from 'entities/book'
-import { fetchCartList } from 'entities/cart/model/slice'
+import { fetchCartList } from 'entities/cart/model/cartSlice'
 import React, { useEffect } from 'react'
 import { useAppDispatch } from 'shared/model/hooks'
 import { BookCard } from 'widgets/book/card'

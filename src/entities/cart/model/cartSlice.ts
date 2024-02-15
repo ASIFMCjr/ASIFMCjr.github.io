@@ -56,29 +56,6 @@ const cartSlice = createSlice({
 				(state, action: PayloadAction<cartApi.CartItem>) => {
 					state.cartItem = action.payload
 				}
-			),
-			builder.addCase(
-				fetchUpdateCart.fulfilled,
-				(state, action: PayloadAction<Array<cartApi.CartItem>>) => {
-					let i = 0
-					const cL = [...state.cartList.products]
-					const actionIdsArr = action.payload.map((el) => el.book_id)
-					const stateIndecies = []
-					while (i < cL.length) {
-						if (!(cL[i].book_id in actionIdsArr)) stateIndecies.push(i)
-						i++
-					}
-					let j = 0
-					while (j < stateIndecies.length) {
-						console.log(cL[stateIndecies[j]], action.payload[j])
-						cL[stateIndecies[j]] = action.payload[j]
-						j++
-					}
-					console.log(cL)
-					cL[0]
-						? (state.cartList.products = cL)
-						: (state.cartList.products = [])
-				}
 			)
 	},
 })

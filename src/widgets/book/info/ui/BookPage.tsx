@@ -6,7 +6,7 @@ import favorite from 'assets/favorite.svg'
 import { favoritesApi } from 'entities/favorites'
 import { Counter } from 'shared/ui/inputs/counter'
 import { useAppDispatch, useAppSelector } from 'shared/model/hooks'
-import { fetchCartList, fetchUpdateCart } from 'entities/cart/model/slice'
+import { fetchCartList, fetchUpdateCart } from 'entities/cart/model/cartSlice'
 
 export const Book = () => {
 	const dispatch = useAppDispatch()
@@ -60,7 +60,6 @@ export const Book = () => {
 								<Button
 									text="Add to Cart"
 									onClick={() => {
-										dispatch(fetchUpdateCart({ book_id: book.id, amount: 1 }))
 										setAmount(1)
 									}}
 								/>

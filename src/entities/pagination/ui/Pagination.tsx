@@ -74,28 +74,17 @@ export const Pagination: React.FC<paginationProps> = ({
 		DOTS,
 	})!
 
-	// const page_params = useLocation()
-
 	const dispatch = useAppDispatch()
-
-	// const params = new URLSearchParams(page_params.search)
-
-	// const navigate = useNavigate()
-
 	if (current_page === 0 || paginationRange.length < 2) {
 		return null
 	}
 
 	const onNext = () => {
-		// params.set('page', String(current_page + 1))
-		// navigate(`?${params.toString()}`)
 		dispatch(fetchBooks({ page: current_page + 1 }))
 		scrollTo({ top: 0, left: 0, behavior: 'smooth' })
 	}
 
 	const onPrevious = () => {
-		// params.set('page', String(current_page - 1))
-		// navigate(`?${params.toString()}`)
 		dispatch(fetchBooks({ page: current_page - 1 }))
 		scrollTo({ top: 0, left: 0, behavior: 'smooth' })
 	}
@@ -126,8 +115,6 @@ export const Pagination: React.FC<paginationProps> = ({
 						className={`pagination-item ${pageNumber === current_page ? 'active' : ''}`}
 						key={pageNumber}
 						onClick={() => {
-							// params.set('page', String(pageNumber))
-							// navigate(`?${params.toString()}`)
 							dispatch(fetchBooks({ page: pageNumber }))
 							scrollTo({ top: 0, left: 0, behavior: 'smooth' })
 						}}
