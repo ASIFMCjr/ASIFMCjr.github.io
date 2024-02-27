@@ -1,5 +1,6 @@
 import React from 'react'
 import './index.sass'
+import { Link } from 'react-router-dom'
 
 export const Footer = () => {
 	return (
@@ -20,11 +21,10 @@ export const Footer = () => {
 			<div className="footer-section">
 				<h1 className="footer-section__heading">Pages</h1>
 				<div className="footer-section__list">
-					{/* <a href='/'>Main</a> */}
-					<a href="/books">Books</a>
-					<a href="/authors">Authors</a>
-					<a href="/auth">Authorization</a>
-					<a href="/cart">Cart</a>
+					<Link to={'/books'}>Books</Link>
+					<Link to={'/authors'}>Authors</Link>
+					<Link to={'/auth'}>Authorization</Link>
+					<Link to={'/cart'}>Cart</Link>
 				</div>
 			</div>
 		</div>

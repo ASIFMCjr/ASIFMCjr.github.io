@@ -3,7 +3,7 @@ import './index.sass'
 import leftArrow from 'assets/leftArrow.svg'
 import rightArrow from 'assets/rightArrow.svg'
 import { useAppDispatch } from 'shared/model/hooks'
-import { fetchBooks } from 'entities/book'
+import { fetchBooks } from 'entities/book/model/bookSlice'
 
 type paginationProps = {
 	pages: number
@@ -75,7 +75,7 @@ export const Pagination: React.FC<paginationProps> = ({
 	})!
 
 	const dispatch = useAppDispatch()
-	if (current_page === 0 || paginationRange.length < 2) {
+	if (current_page === 0 || paginationRange?.length < 2) {
 		return null
 	}
 

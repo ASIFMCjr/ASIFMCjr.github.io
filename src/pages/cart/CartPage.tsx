@@ -39,10 +39,7 @@ export const CartPage = () => {
 					<Button
 						text="Make order"
 						disabled={!cart.products.length}
-						onClick={() => {
-							console.log('здесь модалку и потом заказ')
-							setShowModal(true)
-						}}
+						onClick={() => setShowModal(true)}
 						width={'100%'}
 					/>
 					{showModal &&

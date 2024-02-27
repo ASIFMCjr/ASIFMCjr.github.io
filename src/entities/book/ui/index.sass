@@ -3,8 +3,8 @@
     
 .book_card
     width: 200px
-    height: 200px
-    padding: $p
+    height: 250px
+    padding: 20px 30px
     border-radius: 10px
     box-shadow: $shadow
     margin: 20px
@@ -14,3 +14,23 @@
     justify-content: space-between
     &:hover
         transform: scale(1.1)
+
+.book_card__top
+    height: 65%
+    width: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+.book_card__bottom
+    height: 30%
+    width: 100%
+    display: flex
+    flex-direction: column
+    justify-content: space-evenly
+
+.book_card__top-img
+    margin: auto
+
+.price
+    font-size: 1.3rem
+    color: $primary-color

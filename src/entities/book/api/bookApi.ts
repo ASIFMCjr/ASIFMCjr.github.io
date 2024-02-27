@@ -20,8 +20,8 @@ export interface Book {
 	description: string
 	price: number
 	in_stock: number
-	writing_date: string | Date
-	release_date: string | Date
+	writing_date: string
+	release_date: string
 }
 
 export interface GetBookParams

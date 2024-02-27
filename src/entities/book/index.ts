@@ -1,4 +1,9 @@
-export { BookItem } from './ui/BookItem'
+import { BookItem } from './ui/BookItem'
+export { BookItem }
 
-export * as bookApi from './api/bookApi'
-export { fetchBook, fetchBooks } from './model/bookSlice'
+// export * as bookApi from './api/bookApi'
+// export { fetchBooks } from './model/bookSlice'
+import * as bookApi from './api/bookApi'
+export { bookApi }
+
+// Import fetchBooks from the bookSlice and export it

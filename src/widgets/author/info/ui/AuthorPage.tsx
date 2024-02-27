@@ -12,6 +12,9 @@ export const AuthorInfo = () => {
 			setAuthor(await authorApi.getAuthor(Number(authorId)))
 		initLoad()
 	}, [])
+	useEffect(() => {
+		author && (async () => await 1)
+	}, [author])
 
 	return (
 		<div>

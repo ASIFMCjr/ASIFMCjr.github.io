@@ -3,7 +3,7 @@ import { AuthorCard } from 'widgets/author/card'
 
 export const AuthorsPage = () => {
 	return (
-		<div>
+		<div style={{ margin: 'auto' }}>
 			<AuthorCard />
 		</div>
 	)

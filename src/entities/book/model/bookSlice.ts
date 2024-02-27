@@ -38,11 +38,6 @@ export const fetchBooks = createAsyncThunk<
 	bookApi.GetBookParams | undefined
 >('books/fetchBooks', async (bookParams) => await bookApi.getBooks(bookParams))
 
-export const fetchBook = createAsyncThunk<bookApi.Book, number>(
-	'books/fetchBook',
-	async (id) => await bookApi.getBook(id)
-)
-
 const bookSlice = createSlice({
 	name: 'book',
 	initialState,
@@ -54,9 +49,10 @@ const bookSlice = createSlice({
 	extraReducers: (builder) => {
 		builder.addCase(fetchBooks.fulfilled, (state, action) => {
 			state.booksInfo = action.payload
+			state.loading = false
 		})
-		builder.addCase(fetchBook.fulfilled, (state, action) => {
-			state.book = action.payload
+		builder.addCase(fetchBooks.pending, (state) => {
+			state.loading = true
 		})
 	},
 })

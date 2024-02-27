@@ -41,7 +41,7 @@ export const getCartList = async (): Promise<CartList> =>
 	(await axiosInstance.get('api/cart/')).data
 export const getCartItem = async (id: number): Promise<CartItem> =>
 	(await axiosInstance.get(`api/cart/${id}`)).data
-export const checkValidZipcode = async (zipcode: number): Promise<boolean> =>
+export const checkValidZipcode = async (zipcode: string): Promise<boolean> =>
 	(await axiosInstance.get('api/cart/check_zipcode/', { params: { zipcode } }))
 		.data.is_valid
 export const updateCart = async (

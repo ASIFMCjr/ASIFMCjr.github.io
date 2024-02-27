@@ -10,6 +10,8 @@
     display: flex
     flex-direction: row
     justify-content: space-around
+    @media screen and (max-width: 450px)
+        flex-direction: column
 
     .reverse
         display: inline-block
@@ -20,6 +22,10 @@
         display: flex
         flex-direction: column
         justify-content: space-between
+
+        @media screen and (max-width: 450px)
+            width: 100%
+            margin-bottom: 50px
 
         .footer-section__heading
             width: 100%
@@ -35,8 +41,12 @@
             justify-content: space-around
             color: color-mix(in srgb, $black 60%, $white)
 
+            @media screen and (max-width: 450px)
+                justify-content: flex-start
+
             *
                 display: inline-block
+                margin-bottom: 50px
                 color: color-mix(in srgb, $black 60%, $white)
                 &:hover
                     color: color-mix(in srgb, $black 80%, $white)
