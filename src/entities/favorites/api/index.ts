@@ -2,15 +2,17 @@ import { bookApi } from 'entities/book'
 import { axiosInstance } from 'shared/api'
 
 export interface Favorites {
-	count: number
-	next: string
-	previous: string
-	results: Array<Favorite>
+	links: { next: string | null; previous: string | null }
+	page: number
+	page_size: number
+	result: Array<Favorite>
+	total_items: number
+	total_pages: number
 }
 
 export interface Favorite {
 	favorite_item_id: number
-	book: Array<bookApi.Book>
+	book: bookApi.Book
 }
 
 export const getFavorites = async (

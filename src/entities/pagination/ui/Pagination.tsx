@@ -4,11 +4,13 @@ import leftArrow from 'assets/leftArrow.svg'
 import rightArrow from 'assets/rightArrow.svg'
 import { useAppDispatch } from 'shared/model/hooks'
 import { fetchBooks } from 'entities/book/model/bookSlice'
+import { fetchAuthors } from 'entities/author/model/authorSlice'
 
 type paginationProps = {
 	pages: number
 	current_page: number
 	sibling_count?: number
+	type: 'author' | 'book'
 }
 
 const usePagination = ({
@@ -64,6 +66,7 @@ export const Pagination: React.FC<paginationProps> = ({
 	pages,
 	current_page,
 	sibling_count = 1,
+	type,
 }) => {
 	const DOTS = 0
 
@@ -72,6 +75,7 @@ export const Pagination: React.FC<paginationProps> = ({
 		sibling_count,
 		current_page,
 		DOTS,
+		type,
 	})!
 
 	const dispatch = useAppDispatch()
@@ -80,12 +84,16 @@ export const Pagination: React.FC<paginationProps> = ({
 	}
 
 	const onNext = () => {
-		dispatch(fetchBooks({ page: current_page + 1 }))
+		type === 'book'
+			? dispatch(fetchBooks({ page: current_page + 1 }))
+			: dispatch(fetchAuthors({ page: current_page + 1 }))
 		scrollTo({ top: 0, left: 0, behavior: 'smooth' })
 	}
 
 	const onPrevious = () => {
-		dispatch(fetchBooks({ page: current_page - 1 }))
+		type === 'book'
+			? dispatch(fetchBooks({ page: current_page - 1 }))
+			: dispatch(fetchAuthors({ page: current_page - 1 }))
 		scrollTo({ top: 0, left: 0, behavior: 'smooth' })
 	}
 
@@ -115,7 +123,9 @@ export const Pagination: React.FC<paginationProps> = ({
 						className={`pagination-item ${pageNumber === current_page ? 'active' : ''}`}
 						key={pageNumber}
 						onClick={() => {
-							dispatch(fetchBooks({ page: pageNumber }))
+							type === 'book'
+								? dispatch(fetchBooks({ page: pageNumber }))
+								: dispatch(fetchAuthors({ page: pageNumber }))
 							scrollTo({ top: 0, left: 0, behavior: 'smooth' })
 						}}
 					>

@@ -1,28 +1,12 @@
 import { AuthorItem, authorApi } from 'entities/author'
 import { Pagination } from 'entities/pagination'
-import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { useAppSelector } from 'shared/model/hooks'
 import './index.sass'
 
 export const AuthorCard = () => {
-	const [authors, setAuthors] = useState<authorApi.Authors>()
-
-	const page_params = useLocation()
-
-	const params = new URLSearchParams(page_params.search)
-	const page_size = params.get('page_size')
-	const page = params.get('page')
-
-	useEffect(() => {
-		const initLoad = async () =>
-			setAuthors(
-				await authorApi.getAuthors(
-					page_size ? Number(page_size) : undefined,
-					page ? Number(page) : undefined
-				)
-			)
-		initLoad()
-	}, [page_size, page])
+	const authors = useAppSelector((state) => state.authors.authorsInfo)
 
 	return (
 		<div>
@@ -38,6 +22,7 @@ export const AuthorCard = () => {
 				)
 			})}
 			<Pagination
+				type="author"
 				pages={authors ? authors?.total_pages : 1}
 				current_page={authors ? authors?.page : 1}
 			/>

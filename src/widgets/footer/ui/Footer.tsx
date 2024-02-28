@@ -25,6 +25,8 @@ export const Footer = () => {
 					<Link to={'/authors'}>Authors</Link>
 					<Link to={'/auth'}>Authorization</Link>
 					<Link to={'/cart'}>Cart</Link>
+					{/* <Link to={'/favorites'}>Favorites</Link> */}
+					<Link to={'/orders'}>Orders</Link>
 				</div>
 			</div>
 		</div>

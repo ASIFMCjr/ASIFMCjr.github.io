@@ -32,7 +32,7 @@ export const AuthorInfo = () => {
 				books.result.map((book) => {
 					return (
 						<Link
-							to={`${book.id}`}
+							to={`/books/${book.id}`}
 							// state={{ book: book }}
 							onClick={() => scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
 							key={book.id}

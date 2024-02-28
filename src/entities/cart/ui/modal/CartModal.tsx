@@ -34,7 +34,7 @@ export function Modal({ onClose }: { onClose: () => void }) {
 				return
 			}
 			if (order) {
-				console.log('Order done')
+				console.log('Order is ready')
 				dispatch(fetchCartList())
 				onClose()
 				return

@@ -25,6 +25,8 @@ export const Header = () => {
 				<Link to={'/authors'}>Authors</Link>
 				<Link to={'/auth'}>Auth</Link>
 				<Link to={'/cart'}>Cart</Link>
+				{/* <Link to={'/favorites'}>Favorites</Link> */}
+				<Link to={'/orders'}>Orders</Link>
 			</div>
 			<div className="header-nav__burger">
 				<img
@@ -39,6 +41,8 @@ export const Header = () => {
 						<Link to={'/authors'}>Authors</Link>
 						<Link to={'/auth'}>Auth</Link>
 						<Link to={'/cart'}>Cart</Link>
+						{/* <Link to={'/favorites'}>Favorites</Link>{' '} */}
+						<Link to={'/orders'}>Orders</Link>
 					</div>
 				)}
 			</div>

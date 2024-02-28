@@ -5,10 +5,13 @@ import { Link } from 'react-router-dom'
 import './index.sass'
 import { useAppDispatch, useAppSelector } from 'shared/model/hooks'
 import { fetchBooks } from 'entities/book/model/bookSlice'
+import { Button } from 'shared/ui'
+import { BookFilter } from 'widgets/book/filter'
 
 export const Book = () => {
 	const books = useAppSelector((state) => state.books.booksInfo)
 	const loading = useAppSelector((state) => state.books.loading)
+	const [open, setOpen] = useState<boolean>(false)
 	const [val, setVal] = useState<string>('')
 	const [dir, setDir] = useState<string>('')
 	const dispatch = useAppDispatch()
@@ -47,7 +50,13 @@ export const Book = () => {
 					<option value="release_date">release date</option>
 					<option value="writing_date">writing date</option>
 				</select>
+				<Button
+					text="filters"
+					width="100px"
+					onClick={() => setOpen((prev) => !prev)}
+				/>
 			</div>
+			<div className="booklist-filter">{open && <BookFilter />}</div>
 			<div className="book_cards-elements">
 				{!loading &&
 					books?.result.map((book: bookApi.Book) => {

@@ -21,6 +21,8 @@ import './index.sass'
 import { useAppDispatch, useAppSelector } from 'shared/model/hooks'
 import { setIsAuth } from 'features/auth/sign-up/model/slice'
 import { revokeToken } from 'shared/api'
+import { OrdersPage } from './orders/OrdersPage'
+import { FavoritesPage } from './favorites/FavoritesPage'
 
 type Props = {
 	Component: React.FC
@@ -63,6 +65,16 @@ const Root = () => {
 					<Route
 						path="/cart"
 						element={<ProtectedPrivateRoute Component={CartPage} />}
+					/>
+
+					<Route
+						path="/favorites"
+						element={<ProtectedPrivateRoute Component={FavoritesPage} />}
+					/>
+
+					<Route
+						path="/orders"
+						element={<ProtectedPrivateRoute Component={OrdersPage} />}
 					/>
 					<Route path="/books">
 						<Route

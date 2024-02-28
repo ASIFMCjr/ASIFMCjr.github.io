@@ -9,7 +9,7 @@ import { fetchCartList, fetchUpdateCart } from 'entities/cart/model/cartSlice'
 import { bookApi } from 'entities/book'
 import { authorApi } from 'entities/author'
 import { formatDate } from 'shared/api'
-import { Like } from 'shared/ui/buttons/Like'
+// import { Like } from 'shared/ui/buttons/Like'
 import { genresApi } from 'entities/genres'
 
 export const Book = () => {
@@ -19,7 +19,7 @@ export const Book = () => {
 	const [book, setBook] = useState<bookApi.Book>()
 
 	const [amount, setAmount] = useState<number>(0)
-	const [liked, setLiked] = useState<boolean>(false)
+	// const [liked, setLiked] = useState<boolean>(false)
 
 	const [authors, setAuthors] = useState<Array<authorApi.Author>>([])
 	const [genres, setGenres] = useState<Array<genresApi.Genre>>([])
@@ -113,15 +113,20 @@ export const Book = () => {
 											}}
 										/>
 									)}
-									<Like
+									{/* <Like
 										liked={liked}
-										onClick={() => {
-											// favoritesApi.postFavorites(book.id)
-											setLiked((prev) => !prev)
+										onClick={async () => {
+											try {
+												await favoritesApi.postFavorites(book.id)
+												setLiked((prev) => !prev)
+											} catch (err) {
+												console.log(err)
+												alert('Item already in favorites')
+											}
 										}}
 										className="info-right__add_img"
 										size={40}
-									/>
+									/> */}
 								</div>
 							</div>
 						</div>
