@@ -8,3 +8,9 @@ services:
       context: .
     ports:
       - 3000:80
+  nginx: 
+        restart: unless-stopped
+        build:
+            context: .
+        ports:
+            - 80:80

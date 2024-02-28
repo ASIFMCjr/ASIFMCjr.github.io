@@ -27,40 +27,23 @@ export const CartCard: React.FC<{ key?: number; cart: cartApi.CartItem }> = ({
 	}
 
 	const handleAmount = (param: string, value?: number) => {
+		if (!book) return
 		switch (param) {
 			case 'sub':
-				setAmount((prev) => (0 < prev ? prev - 1 : 0))
-				handleChange(amount > 0 ? amount - 1 : 0)
+				if (amount <= 0) break
+				setAmount(amount - 1)
+				handleChange(amount - 1)
 				break
 			case 'add':
-				setAmount((prev) =>
-					(book ? book.in_stock : 1) > prev ? (prev || 0) + 1 : prev
-				)
-				handleChange(amount < (book ? book.in_stock : 1) ? amount + 1 : amount)
+				if (amount >= book.in_stock) break
+				setAmount(amount + 1)
+				handleChange(amount + 1)
 				break
 			default:
-				setAmount(
-					value
-						? value <= 0
-							? 0
-							: value >= (book ? book.in_stock : 1)
-								? book
-									? book.in_stock
-									: 1
-								: value
-						: 0
-				)
-				handleChange(
-					value
-						? value <= 0
-							? 0
-							: value >= (book ? book.in_stock : 1)
-								? book
-									? book.in_stock
-									: 1
-								: value
-						: 0
-				)
+				if (!value || value < 0) value = 0
+				if (value > book.in_stock) value = book.in_stock
+				setAmount(value)
+				handleChange(value)
 		}
 	}
 

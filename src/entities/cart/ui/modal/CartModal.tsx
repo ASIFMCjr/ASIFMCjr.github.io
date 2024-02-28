@@ -4,6 +4,8 @@ import { Button } from 'shared/ui'
 import close from 'assets/close.svg'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { checkValidZipcode, makeOrder } from 'entities/cart/api/cartApi'
+import { useAppDispatch } from 'shared/model/hooks'
+import { fetchCartList } from 'entities/cart/model/cartSlice'
 export function Modal({ onClose }: { onClose: () => void }) {
 	interface Inputs {
 		city: string
@@ -16,23 +18,35 @@ export function Modal({ onClose }: { onClose: () => void }) {
 		formState: { errors },
 		setError,
 	} = useForm<Inputs>()
+
+	const dispatch = useAppDispatch()
+
 	const onSubmit: SubmitHandler<Inputs> = async ({
 		city,
 		address,
 		zipcode,
 	}) => {
-		if (!(await checkValidZipcode(zipcode))) {
-			setError('zipcode', { type: 'invalid', message: 'Invalid zipcode' })
-			return
+		try {
+			const validZip = await checkValidZipcode(zipcode)
+			const order = await makeOrder({ city, address, zipcode })
+			if (!validZip) {
+				setError('zipcode', { type: 'invalid', message: 'Invalid zipcode' })
+				return
+			}
+			if (order) {
+				console.log('Order done')
+				dispatch(fetchCartList())
+				onClose()
+				return
+			}
+			console.log('Order refused')
+			setError('zipcode', {
+				type: 'internet',
+				message: 'Something went wrong, try later',
+			})
+		} catch (err) {
+			console.log(err)
 		}
-		if (await makeOrder({ city, address, zipcode })) {
-			onClose
-			return
-		}
-		setError('zipcode', {
-			type: 'internet',
-			message: 'Something went wrong, try later',
-		})
 	}
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="modal-cover">

@@ -2,7 +2,6 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { bookApi } from '..'
 
 const initialState: {
-	book: bookApi.Book
 	booksInfo: bookApi.Books
 	params: bookApi.GetBookParams
 	loading: boolean
@@ -17,17 +16,6 @@ const initialState: {
 			next: null,
 			previous: null,
 		},
-	},
-	book: {
-		author: [],
-		genres: [],
-		id: 1,
-		title: '',
-		description: '',
-		price: 0,
-		in_stock: 1,
-		writing_date: String(new Date()),
-		release_date: String(new Date()),
 	},
 	params: {},
 	loading: false,

@@ -8,8 +8,10 @@ export interface Token {
 	access: string
 }
 
+axios.defaults.headers['Access-Control-Allow-Origin'] = '*'
+
 const baseUrl = {
-	baseURL: 'http://localhost:8000',
+	baseURL: 'http://localhost:3000',
 }
 
 export const getToken = async (): Promise<string> => {

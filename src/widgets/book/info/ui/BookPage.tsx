@@ -44,36 +44,20 @@ export const Book = () => {
 		if (!book) return
 		switch (param) {
 			case 'sub':
-				setAmount((prev) => (0 < prev ? prev - 1 : 0))
-				handleChange(amount > 0 ? amount - 1 : 0)
+				if (amount <= 0) break
+				setAmount(amount - 1)
+				handleChange(amount - 1)
 				break
 			case 'add':
-				setAmount((prev) => (book.in_stock > prev ? (prev || 0) + 1 : prev))
-				handleChange(amount < book.in_stock ? amount + 1 : amount)
+				if (amount >= book.in_stock) break
+				setAmount(amount + 1)
+				handleChange(amount + 1)
 				break
 			default:
-				setAmount(
-					value
-						? value <= 0
-							? 0
-							: value >= book.in_stock
-								? book
-									? book.in_stock
-									: 1
-								: value
-						: 0
-				)
-				handleChange(
-					value
-						? value <= 0
-							? 0
-							: value >= book.in_stock
-								? book
-									? book.in_stock
-									: 1
-								: value
-						: 0
-				)
+				if (!value || value < 0) value = 0
+				if (value > book.in_stock) value = book.in_stock
+				setAmount(value)
+				handleChange(value)
 		}
 	}
 	useEffect(() => {
@@ -144,24 +128,26 @@ export const Book = () => {
 					</div>
 
 					<div className="info-other">
-						<p>Author:</p>
-						{authors.length
-							? authors.map((author) => {
-									return (
-										<p key={author.id}>
-											{author.first_name} {author.second_name}
-										</p>
-									)
-								})
-							: 'No author'}
-						<p>Genres:</p>
+						<h2>Author:</h2>
+						{authors.length ? (
+							authors.map((author) => {
+								return (
+									<p key={author.id}>
+										{author.first_name} {author.second_name}
+									</p>
+								)
+							})
+						) : (
+							<p>No author</p>
+						)}
+						<h2>Genres:</h2>
 						{genres.length
 							? genres.map((genre) => {
 									return <p key={genre.id}>{genre.title}</p>
 								})
 							: 'No author'}
-						<p>Writing date: {formatDate(book.writing_date)}</p>
-						<p>Release date: {formatDate(book.release_date)}</p>
+						<h2>Writing date:</h2> <p>{formatDate(book.writing_date)}</p>
+						<h2>Release date:</h2> <p>{formatDate(book.release_date)}</p>
 					</div>
 				</div>
 			)}

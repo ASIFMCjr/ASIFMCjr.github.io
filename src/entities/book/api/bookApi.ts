@@ -41,8 +41,9 @@ export interface GetBookParams
 	ordering?: string
 }
 
-export const getBooks = async (props?: GetBookParams): Promise<Books> =>
-	(await axiosInstance.get(`api/books/`, { params: props })).data
+export const getBooks = async (props?: GetBookParams): Promise<Books> => {
+	return (await axiosInstance.get(`api/books/`, { params: props })).data
+}
 
 export const getBook = async (id: number): Promise<Book> =>
 	(await axiosInstance.get(`api/books/${id}`)).data

@@ -4,7 +4,7 @@ import { setIsAuth } from 'features/auth/sign-up/model/slice'
 import { revokeToken } from 'shared/api'
 
 export const axiosInstance = axios.create({
-	baseURL: 'http://localhost:8000/',
+	baseURL: 'http://localhost:3000/',
 })
 
 axiosInstance.interceptors.request.use(
