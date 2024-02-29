@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/ASIFMCjr/bookstore-gh-pages.git/static/css/main.65eb856d.css",
+    "main.js": "/ASIFMCjr/bookstore-gh-pages.git/static/js/main.e06aaaa1.js",
+    "static/js/787.bc3257e0.chunk.js": "/ASIFMCjr/bookstore-gh-pages.git/static/js/787.bc3257e0.chunk.js",
+    "static/media/search.svg": "/ASIFMCjr/bookstore-gh-pages.git/static/media/search.a1f914cf054a16424ba9798bc2de927d.svg",
+    "static/media/user.svg": "/ASIFMCjr/bookstore-gh-pages.git/static/media/user.e47bbbe54ee5364a293fd1a734385601.svg",
+    "index.html": "/ASIFMCjr/bookstore-gh-pages.git/index.html",
+    "static/media/close.svg": "/ASIFMCjr/bookstore-gh-pages.git/static/media/close.c9c56fc214bebceede6f6aedd7f47d86.svg",
+    "static/media/leftArrow.svg": "/ASIFMCjr/bookstore-gh-pages.git/static/media/leftArrow.55042f7076021d610cb77b73d44206a4.svg",
+    "static/media/rightArrow.svg": "/ASIFMCjr/bookstore-gh-pages.git/static/media/rightArrow.949c8c21c0d273626f49d5d491f5e664.svg",
+    "static/media/burger.svg": "/ASIFMCjr/bookstore-gh-pages.git/static/media/burger.0b62893ab40bd26b167c779e1b237db6.svg",
+    "main.65eb856d.css.map": "/ASIFMCjr/bookstore-gh-pages.git/static/css/main.65eb856d.css.map",
+    "main.e06aaaa1.js.map": "/ASIFMCjr/bookstore-gh-pages.git/static/js/main.e06aaaa1.js.map",
+    "787.bc3257e0.chunk.js.map": "/ASIFMCjr/bookstore-gh-pages.git/static/js/787.bc3257e0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.65eb856d.css",
+    "static/js/main.e06aaaa1.js"
+  ]
+}
