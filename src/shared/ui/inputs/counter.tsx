@@ -1,31 +1,43 @@
 import React from 'react'
-export const Counter: React.FC<{
+import './index.sass'
+
+type CounterProps = {
 	amount: number
-	setAmount: React.Dispatch<React.SetStateAction<number>>
-}> = ({ amount, setAmount }) => {
+	// eslint-disable-next-line no-unused-vars
+	handleAmount: (param: string, value?: number) => void
+	max: number
+	isDisabled: boolean
+}
+
+export const Counter: React.FC<CounterProps> = ({
+	amount,
+	handleAmount,
+	max,
+	isDisabled,
+}) => {
 	return (
-		<div>
+		<div className="counter">
 			<button
-				onClick={() => {
-					setAmount((prev) => (prev || 0) - 1)
-				}}
+				className="counter-btns"
+				onClick={() => handleAmount('sub')}
+				disabled={isDisabled}
 			>
 				-
 			</button>
 			<input
+				className="counter-input"
 				type="number"
 				name=""
 				id=""
 				min={0}
+				max={max}
 				value={amount}
-				onChange={(e) => {
-					setAmount(Number(e.target.value))
-				}}
+				onChange={(e) => handleAmount('', Number(e.target.value))}
 			/>
 			<button
-				onClick={() => {
-					setAmount((prev) => (prev || 0) + 1)
-				}}
+				className="counter-btns"
+				onClick={() => handleAmount('add')}
+				disabled={isDisabled}
 			>
 				+
 			</button>

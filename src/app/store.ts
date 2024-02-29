@@ -1,12 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userSlice from 'features/auth/sign-up/model/slice'
-import booksSlice from 'entities/book/model/slice'
-import cartSlice from 'entities/cart/model/slice'
+import booksSlice from 'entities/book/model/bookSlice'
+import cartSlice from 'entities/cart/model/cartSlice'
+import bookFilterSlice from 'widgets/book/filter/model/bookFilterSlice'
+import favoritesSlice from 'entities/favorites/model/favoritesSlice'
+import orderSlice from 'entities/order/model/orderSlice'
+import authorSlice from 'entities/author/model/authorSlice'
 
 const rootReducer = {
 	user: userSlice,
 	books: booksSlice,
 	cart: cartSlice,
+	filters: bookFilterSlice,
+	favorites: favoritesSlice,
+	orders: orderSlice,
+	authors: authorSlice,
 }
 
 export const store = configureStore({

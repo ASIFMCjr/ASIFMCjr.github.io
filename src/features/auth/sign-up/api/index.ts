@@ -9,6 +9,7 @@ export interface User {
 	is_active?: boolean
 	date_joined?: string
 	last_login?: string
+	is_auth?: boolean
 }
 
 export const checkAvailableEmail = async (email: string): Promise<boolean> =>

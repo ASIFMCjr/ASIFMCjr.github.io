@@ -16,6 +16,9 @@
     color: $white
     font-size: 1rem
 
+    @media screen and (width < 500px)
+        padding: 0 20px
+
     a
         color: $white
 
@@ -23,13 +26,31 @@
         display: inline-block
         transform: scale(-1, 1)
         font-size: 3rem
-
+        @media screen and (max-width: 800px) 
+            display: none
+            
+    .reverse-letter
+        display: inline-block
+        transform: scale(-1, 1)
+        font-size: 3rem
+        @media screen and (min-width: 801px) 
+            display: none
 
     .header-logo
         width: 25%
+        display: flex
+        flex-direction: row
+        place-items: center
+        @media screen and (max-width: 800px)
+            width: auto
+            // display: none
+        @media screen and (max-width: 500px)
+            display: none
 
     .header-search
         width: 50%
+        @media screen and (max-width: 800px)
+            width: 80%
 
     .header-nav
         display: flex
@@ -41,3 +62,26 @@
         *
             &:hover
                 color: color-mix(in srgb, $white 90%, $black)
+
+        @media screen and (max-width: 800px)
+            display: none
+
+    .header-nav__burger
+        @media screen and (min-width: 801px) 
+            display: none
+            
+    .header-nav__burger_open
+        position: absolute
+        margin: 20px
+        border-radius: 20px
+        padding: 20px
+        box-shadow: $shadow
+        background-color: #fff
+        display: flex
+        flex-direction: column
+        justify-content: space-evenly
+        
+        right: 0
+        *
+            color: $black
+            margin: 10px 0

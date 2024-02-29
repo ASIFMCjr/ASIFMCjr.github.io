@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppDispatch } from 'shared/model/hooks'
 import { FieldValues, useForm } from 'react-hook-form'
-import { setUser } from '../model/slice'
+import { setIsAuth, setUser } from '../model/slice'
 import { checkAvailableEmail, signUp } from '../api'
 import { Form, type FormValues } from 'entities/form'
 import { useNavigate } from 'react-router-dom'
@@ -28,6 +28,7 @@ export const SignUpForm = () => {
 			await signUp(email, password)
 			await createTokens(email, password)
 			dispatch(setUser({ email, password }))
+			dispatch(setIsAuth(true))
 			clearErrors('email')
 			navigate('../books')
 		} catch (err: any) {

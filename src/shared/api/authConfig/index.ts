@@ -1,5 +1,7 @@
+import { store } from 'app/store'
 import axios from 'axios'
-import { getToken, revokeToken } from 'shared/api'
+import { setIsAuth } from 'features/auth/sign-up/model/slice'
+import { revokeToken } from 'shared/api'
 
 export const axiosInstance = axios.create({
 	baseURL: 'http://localhost:3000/',
@@ -7,23 +9,26 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
 	async (config) => {
-		const token: string = await getToken()
+		const token: string | null = localStorage.getItem('access')
 		const auth: string = token ? `Bearer ${token}` : ''
 
 		config.headers['Authorization'] = auth
-
+		store.dispatch(setIsAuth(true))
 		return config
 	},
 	(error) => Promise.reject(error)
 )
 
 axiosInstance.interceptors.response.use(
-	(response) => response,
+	(response) => {
+		store.dispatch(setIsAuth(true))
+		return response
+	},
 	async (error) => {
-		if (error.response && error.response.status === 401) {
+		if (error.response.status === 401) {
 			return await revokeToken()
 		}
-
+		store.dispatch(setIsAuth(false))
 		Promise.reject(error)
 	}
 )

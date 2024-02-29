@@ -11,6 +11,7 @@ const initialState: { user: User } = {
 		is_active: undefined,
 		date_joined: undefined,
 		last_login: undefined,
+		is_auth: false,
 	},
 }
 const userSlice = createSlice({
@@ -20,8 +21,11 @@ const userSlice = createSlice({
 		setUser: (state, action: PayloadAction<User>) => {
 			state.user = action.payload
 		},
+		setIsAuth: (state, action: PayloadAction<boolean>) => {
+			state.user.is_auth = action.payload
+		},
 	},
 })
 
 export default userSlice.reducer
-export const { setUser } = userSlice.actions
+export const { setUser, setIsAuth } = userSlice.actions

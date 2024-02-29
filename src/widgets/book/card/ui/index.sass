@@ -13,3 +13,29 @@
     flex-direction: row
     flex-wrap: wrap
     justify-content: center
+
+.book_cards-sort
+    align-self: flex-start
+    margin-left: 50px
+    display: flex
+    flex-direction: row
+    align-items: center
+    *
+        margin-right: 10px
+    select
+        display: inline-block
+        appearance: none
+        padding: 8px
+        border-radius: 10px
+        border: none
+        box-shadow: $shadow
+        text-align-last: center
+    button
+        @media screen and (min-width: 851px)
+            display: none
+
+
+.booklist-filter
+    margin-left: $p
+    @media screen and (min-width: 851px)
+        display: none

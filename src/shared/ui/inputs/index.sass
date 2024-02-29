@@ -1,0 +1,40 @@
+@import 'shared/ui/colors'
+@import 'shared/ui/scales'
+    
+.counter
+    height: 40px
+    width: 100px
+    border: none
+    border-radius: 10px
+    background-color: $white
+    color: $white
+    display: inline-flex
+    flex-direction: row
+    justify-content: space-between
+    input
+        &[type="number"] 
+            -moz-appearance: textfield
+
+    
+.counter-btns
+    appearance: none
+    background-color: $white
+    border: none
+    border-radius: 10px
+    width: 50px
+    transition: 0.1s ease-in
+    &:hover
+        background-color: color-mix(in srgb, $white 75%, $primary-color)
+
+.counter-input
+    width: 100%
+    background-color: $white
+    border: none
+    text-align: center
+    &:focus
+        outline: none
+    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button
+        -webkit-appearance: none
+        margin: 0
+        
+        
